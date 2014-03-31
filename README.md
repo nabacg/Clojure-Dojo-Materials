@@ -5,6 +5,9 @@ Useful materials for our internal Clojure Dojo
 
 Higher Order Functions implementations
 
+Task
+Implement Count, Sum, Map, Filter, Remove using only core Clojure functions.
+
 Count
 
 1. Naive Recursion 
@@ -12,3 +15,8 @@ Count
 3. Implementing using another higher order, i.e. reduce
 
 
+Sum
+
+Map
+
+Filter
