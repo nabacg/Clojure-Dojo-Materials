@@ -45,14 +45,18 @@
       (recur (+ (first lst) acc) (rest lst))
       acc)))
 
+(my-sum (range 10))
+
 (defn my-filter [pred coll]
   (loop [acc [] lst coll]
     (if (seq lst)
       (recur (if (pred (first lst))
                (conj acc (first lst))
                acc)
-             (rest lst)))))
+             (rest lst))
+      acc)))
 
+(my-filter even? (range 11))
 
 (defn my-remove [pred coll]
   (loop [acc [] lst coll]
@@ -60,7 +64,10 @@
       (recur (if (pred (first lst))
                acc
                (conj acc (first lst)))
-             (rest coll)))))
+             (rest lst))
+      acc)))
+
+(my-remove even? (range 11))
 
 (defn my-reduce
   ([fold-fn coll] (my-reduce fold-fn (fold-fn (first coll)) (rest coll)))
@@ -71,9 +78,20 @@
                 (rest lst))
          acc))))
 
+(my-reduce + (range 3))
+(my-reduce * (range 1 7))
+
 (defn my-map [fun coll]
   (loop [acc [] lst coll]
     (if (seq lst)
       (recur (conj acc (fun (first lst)))
              (rest lst))
       (seq acc))))
+
+(my-map first {:a 5 :b 23})
+
+
+(defn -main
+  "I don't do a whole lot ... yet."
+  [& args]
+  (println "Hello, World!"))
