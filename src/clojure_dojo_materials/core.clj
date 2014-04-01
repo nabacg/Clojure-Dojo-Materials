@@ -38,3 +38,42 @@
 (my-hof-count (fn [n i] (inc n)) (range 10))
 (my-hof-count #(if (even? %2) (inc %) %) (range 11))
 
+
+(defn my-sum [coll]
+  (loop [acc 0 lst coll]
+    (if (seq lst)
+      (recur (+ (first lst) acc) (rest lst))
+      acc)))
+
+(defn my-filter [pred coll]
+  (loop [acc [] lst coll]
+    (if (seq lst)
+      (recur (if (pred (first lst))
+               (conj acc (first lst))
+               acc)
+             (rest lst)))))
+
+
+(defn my-remove [pred coll]
+  (loop [acc [] lst coll]
+    (if (seq lst)
+      (recur (if (pred (first lst))
+               acc
+               (conj acc (first lst)))
+             (rest coll)))))
+
+(defn my-reduce
+  ([fold-fn coll] (my-reduce fold-fn (fold-fn (first coll)) (rest coll)))
+  ([fold-fn init coll]
+     (loop [acc init lst coll]
+       (if (seq lst)
+         (recur (fold-fn acc (first lst))
+                (rest lst))
+         acc))))
+
+(defn my-map [fun coll]
+  (loop [acc [] lst coll]
+    (if (seq lst)
+      (recur (conj acc (fun (first lst)))
+             (rest lst))
+      (seq acc))))
